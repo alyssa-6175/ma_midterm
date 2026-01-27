@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+</style>
+
+<body>
+    <h1>Welcome to ADMIN</h1>
+    <p><a href="index.html">Back to Bulletin Board</a></p>
+
+    <h4>It's simple! All you have to do is fill in the blanks for the missing letters, then when you put them together,
+        the secret code will be unlocked! (Hint: they're all fruits!)</h4>
+    <h6>in your browser simply add ?code= and then the code!</h6>
+    <p>dra_onfruit</p>
+    <p>mang_es</p>
+    <p>appl_s</p>
+    <p>p_ssionfruit</p>
+    <p>_uava</p>
+    <p>p_ums</p>
+    <p>orang_s</p>
+    <p>_tarfruit</p>
+
+    <h2 id="secret-message"></h2>
+</body>
+<script>
+    const queryString = window.location.search
+    const urlParameters = new URLSearchParams(queryString);
+
+    let code = urlParameters.get('code');
+
+    if (code.toLowerCase() == "goeagles") {
+        document.getElementById("secret-message").innerHTML = "Congratulations! You cracked the code!"
+    }
+</script>
+
+</html>

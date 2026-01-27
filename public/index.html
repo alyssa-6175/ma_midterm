@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Board View</title>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <h1>Message Board</h1>
+    <h3>Hover over and click task name to go to task</h3>
+    <p><a href="form.html">Add New Message</a></p>
+
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Points</th>
+                <th>Progress</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="dataTable"></tbody>
+    </table>
+
+    <script>
+        async function loadMessages() {
+            const data = [
+                { task: "admin", points: "10", progress: "0/1", status: "available", link: "admin.html" },
+                { task: "cookie clicker", points: "5", progress: "0/100", status: "available", link: "cookie_clicker.html" },
+                { task: "the final task", points: "8", progress: "0/4", status: "available", link: "final.html" }
+            ];
+
+            const tableBody = document.getElementById('dataTable');
+            tableBody.innerHTML = '';
+
+            data.forEach(item => {
+                const rowHTML = `
+                <tr>
+                    <td><a href="${item.link}">${item.task}</a></td>
+                    <td>${item.points}</td>
+                    <td>${item.progress}</td>
+                    <td>${item.status}</td>
+                </tr>
+            `;
+                tableBody.innerHTML += rowHTML;
+            });
+        }
+
+        loadMessages();
+    </script>
+
+</body>
+
+</html>
