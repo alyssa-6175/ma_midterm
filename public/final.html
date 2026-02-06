@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Demo</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .match-btn {
+            padding: 8px 12px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .matched {
+            background-color: greenyellow;
+            color: black;
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        #resetBtn {
+            margin-top: 20px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>The final task</h2>
+    <h3>
+        <a href="index.html">Back to Bulletin Board</a>
+    </h3>
+
+    <button id="resetBtn">Reset Game</button>
+
+    <div class="container">
+
+        <div class="item">
+            <button class="match-btn" data-anim="bounce-4">Box 4</button>
+            <div class="stage">
+                <div class="box bounce-4"></div>
+            </div>
+        </div>
+        <div class="item">
+            <button class="match-btn" data-anim="bounce-1">Box 1</button>
+            <div class="stage">
+                <div class="box bounce-1"></div>
+            </div>
+        </div>
+
+
+
+        <div class="item">
+            <button class="match-btn" data-anim="bounce-2">Box 2</button>
+            <div class="stage">
+                <div class="box bounce-2"></div>
+            </div>
+        </div>
+
+        <div class="item">
+            <button class="match-btn" data-anim="bounce-7">Box 3</button>
+            <div class="stage">
+                <div class="box bounce-7"></div>
+            </div>
+        </div>
+
+
+        <div class="item">
+            <button class="match-btn" data-anim="bounce-1">Box 5</button>
+            <div class="stage">
+                <div class="box bounce-1"></div>
+            </div>
+        </div>
+        <div class="item">
+            <button class="match-btn" data-anim="bounce-4">Box 8</button>
+            <div class="stage">
+                <div class="box bounce-4"></div>
+            </div>
+        </div>
+
+        <div class="item">
+            <button class="match-btn" data-anim="bounce-7">Box 7</button>
+            <div class="stage">
+                <div class="box bounce-7"></div>
+            </div>
+        </div>
+        <div class="item">
+            <button class="match-btn" data-anim="bounce-2">Box 6</button>
+            <div class="stage">
+                <div class="box bounce-2"></div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <script>
+        const buttons = document.querySelectorAll('.match-btn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        const message = document.createElement('p');
+        message.id = 'message';
+        message.textContent = 'Congratulations, you matched all of the boxes!';
+        message.style.display = 'none';
+        document.body.insertBefore(message, document.querySelector('.container'));
+
+        let matches = parseInt(getCookie("finalMatches")) || 0;
+        let selected = [];
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.classList.contains('matched') || selected.includes(btn)) return;
+
+                btn.classList.add('selected');
+                selected.push(btn);
+
+                if (selected.length === 2) {
+                    const [first, second] = selected;
+
+                    // FIX: use 'data-anim' (matches your HTML)
+                    if (first.dataset.anim === second.dataset.anim) {
+                        first.classList.remove('selected');
+                        second.classList.remove('selected');
+                        first.classList.add('matched');
+                        second.classList.add('matched');
+
+                        matches++; // increment once per pair
+                        document.cookie = `finalMatches=${matches}; path=/`;
+
+                        checkWin();
+                    } else {
+                        setTimeout(() => {
+                            first.classList.remove('selected');
+                            second.classList.remove('selected');
+                        }, 600);
+                    }
+                    selected = [];
+                }
+            });
+        });
+
+        function checkWin() {
+            const matchedCount = document.querySelectorAll('.matched').length;
+            if (matchedCount === buttons.length) {
+                message.style.display = 'block';
+            }
+        }
+
+        resetBtn.addEventListener('click', () => {
+            buttons.forEach(btn => btn.classList.remove('selected', 'matched'));
+            selected = [];
+            matches = 0;
+            document.cookie = `finalMatches=0; path=/`;
+            message.style.display = 'none';
+        });
+
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let cookies = document.cookie.split(';');
+            for (let c of cookies) {
+                c = c.trim();
+                if (c.indexOf(nameEQ) === 0) {
+                    return c.substring(nameEQ.length);
+                }
+            }
+            return null;
+        }
+    </script>
+
+</body>
+
+</html>

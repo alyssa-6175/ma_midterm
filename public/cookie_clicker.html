@@ -23,7 +23,9 @@
         <a href="index.html">Back to Bulletin Board</a>
     </h3>
     <h3>cookie clicker counter: <span id="counter">0</span></h3>
+    <button id="resetBtn">Reset Cookies</button>
     <img src="images/cookie.png" width="600px" id="cookie">
+    <p id="message"></p>
 </body>
 
 <script>
@@ -58,10 +60,28 @@
 
 
     cookieImg.addEventListener("click", () => {
-        count++;
+        if (count < 100) {
+            count++;
+            setCookie("cookieCount", count, 365);
+        }
+
         counterText.textContent = count;
-        setCookie("cookieCount", count, 365); // save for 1 year
+
+        if (count >= 100) {
+            document.getElementById("message").innerHTML = "congrats! u hit 100";
+        }
     });
+
+
+    const resetBtn = document.getElementById("resetBtn");
+
+    resetBtn.addEventListener("click", () => {
+        count = 0;
+        counterText.textContent = count;
+        setCookie("cookieCount", count, 365);
+    });
+
+
 
 
 </script>

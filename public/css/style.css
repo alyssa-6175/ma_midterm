@@ -1,0 +1,254 @@
+body {
+    text-align: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+.item {
+    height: 400px;
+}
+
+.stage {
+    border-bottom: 3px solid #444;
+    margin-top: 150px;
+}
+
+.box {
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    background-color: lightblue;
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+    transform-origin: bottom;
+}
+
+.bounce-1 {
+    animation-name: bounce-1;
+    animation-timing-function: linear;
+}
+
+@keyframes bounce-1 {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-100px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.bounce-2 {
+    animation-name: bounce-2;
+    animation-timing-function: ease;
+}
+
+@keyframes bounce-2 {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-100px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.bounce-3 {
+    animation-name: bounce-3;
+    animation-timing-function: ease;
+    animation-duration: 4s;
+}
+
+@keyframes bounce-3 {
+    0% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-100px);
+    }
+
+    50% {
+        transform: translateY(0px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.bounce-4 {
+    animation-name: bounce-4;
+    animation-timing-function: ease;
+}
+
+@keyframes bounce-4 {
+    0% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    10% {
+        transform: scale(1.1, 0.9) translateY(0);
+    }
+
+    30% {
+        transform: scale(0.9, 1.1) translateY(-100px);
+    }
+
+    50% {
+        transform: scale(1, 1) translateY(-100px);
+    }
+
+    100% {
+        transfrom: scale(1, 1) translateY(0);
+    }
+
+}
+
+.bounce-5 {
+    animation-name: bounce-5;
+    animation-timing-function: ease;
+}
+
+@keyframes bounce-5 {
+    0% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    10% {
+        transform: scale(1.1, 0.9) translateY(0);
+    }
+
+    30% {
+        transform: scale(0.9, 1.1) translateY(-100px);
+    }
+
+    60% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    67% {
+        transform: scale(1, 1) translateY(-7px);
+    }
+
+    77% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    100% {
+        transform: scale(1, 1) translateY(0);
+    }
+}
+
+.bounce-6 {
+    animation-name: bounce-6;
+    animation-timing-function: ease;
+}
+
+@keyframes bounce-6 {
+    0% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    10% {
+        transform: scale(1.1, 0.9) translateY(0);
+    }
+
+    30% {
+        transform: scale(0.9, 1.1) translateY(-100px);
+    }
+
+    60% {
+        transform: scale(1.2, 0.8) translateY(0);
+    }
+
+    67% {
+        transform: scale(1, 1) translateY(-7px);
+    }
+
+    77% {
+        transform: scale(1.05, 0.95) translateY(0);
+    }
+
+    100% {
+        transform: scale(1, 1) translateY(0);
+    }
+}
+
+.bounce-7 {
+    animation-name: bounce-7;
+    animation-timing-function: cubic-bezier(0.280, 0.840, 0.420, 1);
+}
+
+@keyframes bounce-7 {
+    0% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    10% {
+        transform: scale(1.1, 0.9) translateY(0);
+    }
+
+    30% {
+        transform: scale(0.9, 1.1) translateY(-100px);
+    }
+
+    60% {
+        transform: scale(1.2, 0.8) translateY(0);
+    }
+
+    67% {
+        transform: scale(1, 1) translateY(-7px);
+    }
+
+    77% {
+        transform: scale(1.05, 0.95) translateY(0);
+    }
+
+    100% {
+        transform: scale(1, 1) translateY(0);
+    }
+}
+
+.bounce-8 {
+    animation-name: bounce-8;
+    animation-timing-function: step-start;
+    animation-duration: 4s;
+}
+
+@keyframes bounce-8 {
+    0% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    10% {
+        transform: scale(1.1, 0.9) translateY(0);
+    }
+
+    30% {
+        transform: scale(0.9, 1.1) translateY(-100px);
+    }
+
+    60% {
+        transform: scale(1.2, 0.8) translateY(0);
+    }
+
+    70% {
+        transform: scale(1, 1) translateY();
+    }
+
+    100% {
+        transform: scale(1, 1) translateY(0);
+    }
+}

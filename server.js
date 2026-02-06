@@ -7,7 +7,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public')); // this serves html automatically
 
-let dataStore = [{ task: "Admin", points: "1 Point", progress: "0/1", status: "available", link: "admin.html" }];
+let dataStore = [
+    { task: "Admin", points: "1 Point", progress: "0/1", status: "available", link: "admin.html" },
+    { task: "cookie clicker", points: "8 points", progress: "0/100", status: "available", link: "cookie_clicker.html" },
+    { task: "final task", points: "8 points", progress: "0/8", status: "available", link: "final.html" }
+];
+
+
 
 // get: send data to table
 app.get('/api/messages', (req, res) => { res.json(dataStore) });

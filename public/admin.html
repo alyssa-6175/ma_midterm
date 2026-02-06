@@ -32,14 +32,18 @@
     <h2 id="secret-message"></h2>
 </body>
 <script>
-    const queryString = window.location.search
+    const queryString = window.location.search;
     const urlParameters = new URLSearchParams(queryString);
 
     let code = urlParameters.get('code');
 
-    if (code.toLowerCase() == "goeagles") {
-        document.getElementById("secret-message").innerHTML = "Congratulations! You cracked the code!"
+    if (code && code.toLowerCase() === "goeagles") {
+        document.getElementById("secret-message").innerHTML =
+            "Congratulations! You cracked the code!";
+
+        document.cookie = "adminDone=true; path=/";
     }
 </script>
+
 
 </html>

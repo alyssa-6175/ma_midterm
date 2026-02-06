@@ -12,8 +12,9 @@
 </head>
 
 <body>
-    <h1>Message Board</h1>
+    <h1>Bulletin Board</h1>
     <h3>Hover over and click task name to go to task</h3>
+
     <p><a href="form.html">Add New Message</a></p>
 
     <table border="1" cellpadding="10">
@@ -29,27 +30,67 @@
     </table>
 
     <script>
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let cookies = document.cookie.split(';');
+            for (let c of cookies) {
+                c = c.trim();
+                if (c.indexOf(nameEQ) === 0) {
+                    return c.substring(nameEQ.length);
+                }
+            }
+            return null;
+        }
+
         async function loadMessages() {
-            const data = [
-                { task: "admin", points: "10", progress: "0/1", status: "available", link: "admin.html" },
-                { task: "cookie clicker", points: "5", progress: "0/100", status: "available", link: "cookie_clicker.html" },
-                { task: "the final task", points: "8", progress: "0/4", status: "available", link: "final.html" }
-            ];
+            const response = await fetch('/api/messages');
+            const data = await response.json();
 
             const tableBody = document.getElementById('dataTable');
             tableBody.innerHTML = '';
 
-            data.forEach(item => {
-                const rowHTML = `
+            data.forEach((item, index) => {
+                let progress = item.progress;
+                let status = item.status;
+
+                // ADMIN TASK
+                if (item.task.toLowerCase() === "admin") {
+                    if (getCookie("adminDone")) {
+                        progress = "1/1";
+                        status = "completed";
+                    }
+                }
+
+                // COOKIE CLICKER
+                if (item.task.toLowerCase() === "cookie clicker") {
+                    const count = parseInt(getCookie("cookieCount")) || 0;
+                    progress = `${count}/100`;
+                    status = count >= 100 ? "completed" : "in progress";
+                }
+
+                // FINAL TASK
+                if (item.task.toLowerCase() === "final task") {
+                    const matches = parseInt(getCookie("finalMatches")) || 0;
+                    progress = `${matches}/4`;
+                    status = matches === 4 ? "completed" : "in progress";
+
+                }
+
+                tableBody.innerHTML += `
                 <tr>
                     <td><a href="${item.link}">${item.task}</a></td>
                     <td>${item.points}</td>
-                    <td>${item.progress}</td>
-                    <td>${item.status}</td>
+                    <td>${progress}</td>
+                    <td>${status}</td>
+                    <td><button onclick="deleteTask(${index})">Delete</button></td>
                 </tr>
             `;
-                tableBody.innerHTML += rowHTML;
             });
+        }
+
+        async function deleteTask(index) {
+            await fetch(`/api/messages/${index}`, { method: 'DELETE' });
+            loadMessages();
         }
 
         loadMessages();
